@@ -13,6 +13,11 @@
 #
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import gi
+gi.require_version('Gtk','3.0')
+from gi.repository import Gtk
+from gi.repository import GObject
  
 from threading import Thread
 from PIL import Image
@@ -21,22 +26,20 @@ from PIL import ImageOps
 import array
 import asyncore
 import cairo
-import gnome15.g15driver as g15driver
-import gnome15.g15locale as g15locale
-import gnome15.g15screen as g15screen
-import gnome15.g15theme as g15theme
-import gnome15.util.g15convert as g15convert
-import gnome15.util.g15uigconf as g15uigconf
-import gnome15.util.g15gconf as g15gconf
-import gnome15.util.g15cairo as g15cairo
-import gobject
-import gtk
+from gnome15 import g15driver
+from gnome15 import g15locale
+from gnome15 import g15screen
+from gnome15 import g15theme
+from gnome15.util import g15convert
+from gnome15.util import g15uigconf
+from gnome15.util import g15gconf
+from gnome15.util import g15cairo
 import logging
 import os
 import socket
 import struct
 import sys
-_ = g15locale.get_translation("g15daemon-server", modfile = __file__).ugettext
+_ = g15locale.get_translation("g15daemon-server", modfile = __file__).gettext
 
 logger = logging.getLogger(__name__)
 
@@ -108,7 +111,7 @@ def create(gconf_key, gconf_client, screen):
     return G15DaemonServer(gconf_key, gconf_client, screen)
 
 def show_preferences(parent, driver, gconf_client, gconf_key):
-    widget_tree = gtk.Builder()
+    widget_tree = Gtk.Builder()
     widget_tree.add_from_file(os.path.join(os.path.dirname(__file__), "g15daemon-server.ui"))
     
     dialog = widget_tree.get_object("G15DaemonServerDialog")

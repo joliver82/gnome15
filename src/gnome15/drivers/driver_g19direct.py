@@ -18,22 +18,22 @@
 Alternative implementation of a G19 Driver that uses pylibg19 to communicate directly
 with the keyboard 
 """ 
-import gnome15.g15locale as g15locale
-_ = g15locale.get_translation("gnome15-drivers").ugettext
+from gnome15 import g15locale
+_ = g15locale.get_translation("gnome15-drivers").gettext
 
-from cStringIO import StringIO
+from io import StringIO
 from threading import RLock
 import cairo
-import gnome15.g15driver as g15driver
-import gnome15.g15globals as g15globals
-import gnome15.util.g15convert as g15convert
-import gnome15.util.g15uigconf as g15uigconf
-import gnome15.util.g15cairo as g15cairo
-import gnome15.g15exceptions as g15exceptions
+from gnome15 import g15driver
+from gnome15 import g15globals
+from gnome15.util import g15convert
+from gnome15.util import g15uigconf
+from gnome15.util import g15cairo
+from gnome15 import g15exceptions
 import sys
 import os
-import gconf
-import gtk
+from gi.repository import GConf
+from gi.repository import Gtk
 import usb
 import logging
 import array
@@ -116,25 +116,25 @@ class G19DriverPreferences():
 
     def __init__(self, device, parent, gconf_client):
         g15locale.get_translation("driver_g19direct")
-        widget_tree = gtk.Builder()
+        widget_tree = Gtk.Builder()
         widget_tree.set_translation_domain("driver_g19direct")
         widget_tree.add_from_file(os.path.join(g15globals.ui_dir, "driver_g19direct.ui"))
         self.window = widget_tree.get_object("G19DirectDriverSettings")
-        self.window.set_transient_for(parent)
+        self.set_transient_for(parent)
 
-        g15uigconf.configure_checkbox_from_gconf(gconf_client,
+        g15uiGConf.configure_checkbox_from_gconf(gconf_client,
                                                  "/apps/gnome15/%s/reset_usb" % device.uid,
                                                  "Reset",
                                                  False,
                                                  widget_tree,
                                                  True)
-        g15uigconf.configure_spinner_from_gconf(gconf_client,
+        g15uiGConf.configure_spinner_from_gconf(gconf_client,
                                                 "/apps/gnome15/%s/timeout" % device.uid,
                                                 "Timeout",
                                                 10000,
                                                 widget_tree,
                                                 False)
-        g15uigconf.configure_spinner_from_gconf(gconf_client,
+        g15uiGConf.configure_spinner_from_gconf(gconf_client,
                                                 "/apps/gnome15/%s/reset_wait" % device.uid,
                                                 "ResetWait",
                                                 0,
@@ -153,7 +153,7 @@ class Driver(g15driver.AbstractDriver):
         self.device = device
         self.lock = RLock()
         self.connected = False
-        self.conf_client = gconf.client_get_default()
+        self.conf_client = GConf.Client.get_default()
     
     def get_antialias(self):
         return cairo.ANTIALIAS_SUBPIXEL

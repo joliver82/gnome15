@@ -18,22 +18,22 @@
 Alternative implementation of a G19 Driver that uses pylibg19 to communicate directly
 with the keyboard 
 """ 
-import gnome15.g15locale as g15locale
-_ = g15locale.get_translation("gnome15-drivers").ugettext
+from gnome15 import g15locale
+_ = g15locale.get_translation("gnome15-drivers").gettext
 
 from threading import RLock
 import cairo
-import gnome15.g15driver as g15driver
-import gnome15.g15globals as g15globals
-import gnome15.util.g15scheduler as g15scheduler
-import gnome15.util.g15uigconf as g15uigconf
-import gnome15.util.g15gconf as g15gconf
-import gnome15.g15uinput as g15uinput
-import gnome15.g15exceptions as g15exceptions
+from gnome15 import g15driver
+from gnome15 import g15globals
+from gnome15.util import g15scheduler
+from gnome15.util import g15uigconf
+from gnome15.util import g15gconf
+from gnome15 import g15uinput
+from gnome15 import g15exceptions
 import sys
 import os
-import gconf
-import gtk
+from gi.repository import GConf
+from gi.repository import Gtk
 import logging
 from PIL import ImageMath
 from PIL import Image
@@ -41,7 +41,7 @@ import array
 logger = logging.getLogger(__name__)
 load_error = None
 try :
-    import pylibg15
+    from . import pylibg15
 except Exception as a:
     logger.debug("Could not import pylibg15 module", exc_info = a)
     load_error = a
@@ -108,10 +108,10 @@ EXT_KEY_MAP = {
         }
 
 REVERSE_KEY_MAP = {}
-for k in KEY_MAP.keys():
+for k in list(KEY_MAP.keys()):
     REVERSE_KEY_MAP[KEY_MAP[k]] = k
 EXT_REVERSE_KEY_MAP = {}
-for k in EXT_KEY_MAP.keys():
+for k in list(EXT_KEY_MAP.keys()):
     EXT_REVERSE_KEY_MAP[EXT_KEY_MAP[k]] = k
 
 mkeys_control = g15driver.Control("mkeys", _("Memory Bank Keys"), 1, 0, 15, hint=g15driver.HINT_MKEYS)
@@ -147,13 +147,13 @@ class G15DirectDriverPreferences():
         self.device = device
 
         g15locale.get_translation("driver_g15direct")
-        widget_tree = gtk.Builder()
+        widget_tree = Gtk.Builder()
         widget_tree.set_translation_domain("driver_g15direct")
         widget_tree.add_from_file(os.path.join(g15globals.ui_dir, "driver_g15direct.ui"))
         self.window = widget_tree.get_object("G15DirectDriverSettings")
-        self.window.set_transient_for(parent)
+        self.set_transient_for(parent)
 
-        g15uigconf.configure_spinner_from_gconf(gconf_client,
+        g15uiGConf.configure_spinner_from_gconf(gconf_client,
                                                 "/apps/gnome15/%s/timeout" % device.uid,
                                                 "Timeout",
                                                 10000,
@@ -166,7 +166,7 @@ class G15DirectDriverPreferences():
             widget_tree.get_object("OffsetLabel").destroy()
             widget_tree.get_object("OffsetDescription").destroy()
         else:
-            g15uigconf.configure_combo_from_gconf(gconf_client,
+            g15uiGConf.configure_combo_from_gconf(gconf_client,
                                                   "/apps/gnome15/%s/joymode" % device.uid,
                                                   "JoyModeCombo",
                                                   "macro",
@@ -227,7 +227,7 @@ class Driver(g15driver.AbstractDriver):
         self.move_x = 0
         self.move_y = 0
         self.connected = False
-        self.conf_client = gconf.client_get_default()
+        self.conf_client = GConf.Client.get_default()
         self.last_keys = None
         self.last_ext_keys = None
         
@@ -408,7 +408,7 @@ class Driver(g15driver.AbstractDriver):
         self.digital_calibration = g15gconf.get_int_or_default(self.conf_client, "/apps/gnome15/%s/digital_offset" % self.device.uid, 63)
         self.analogue_calibration = g15gconf.get_int_or_default(self.conf_client, "/apps/gnome15/%s/analogue_offset" % self.device.uid, 20)
             
-    def _config_changed(self, client, connection_id, entry, args):
+    def _config_changed(self, client, connection_id, entry, *args):
         self._load_configuration()
             
     def _on_disconnect(self):  

@@ -15,7 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import g15convert
+from . import g15convert
 
 '''
 Set of utility methods to ease the binding between UI widgets and gconf settings

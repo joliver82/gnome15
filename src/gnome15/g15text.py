@@ -76,23 +76,23 @@ class G15PangoText(G15Text):
         G15Text.__init__(self, antialias)
         PangoCairo.context_set_font_options(pango_context, self._create_font_options())   
         self.__pango_cairo_context = None
-        self.__layout = None
         self.valign = Pango.Alignment.CENTER
         self.__layout = Pango.Layout.new(pango_context)
         
     def set_canvas(self, canvas):           
         G15Text.set_canvas(self, canvas)
-        layout = PangoCairo.create_layout(self.canvas)
-        self.__pango_cairo_context = layout.get_context()
+        self.__layout = PangoCairo.create_layout(self.canvas)
+        self.__pango_cairo_context = self.__layout.get_context()
+        PangoCairo.context_set_font_options(self.__pango_cairo_context, self._create_font_options())
         
     def set_attributes(self, text, bounds = None, wrap = None, align = Pango.Alignment.LEFT, width = None, spacing = None, \
             font_desc = None, font_absolute_size = None, attributes = None,
             weight = None, style = None, font_pt_size = None,
             valign = None, pxwidth = None):
         
-        logger.debug("Text: %s, bounds = %s, wrap = %s, align = %s, width = %s, " \
+            logger.debug("Text: %s, bounds = %s, wrap = %s, align = %s, width = %s, " \
                      "attributes = %s, spacing = %s, font_desc = %s, weight = %s, " \
-                     "style = %s, valign = %s, font_absolute_size = %s, font_pt_size = %s",
+                     "style = %s, valign = %s, pxwidth = %s, font_absolute_size = %s, font_pt_size = %s",
                      str(text),
                      str(bounds),
                      str(wrap),
@@ -104,9 +104,10 @@ class G15PangoText(G15Text):
                      str(weight),
                      str(style),
                      str(valign),
+                     str(pxwidth),
                      str(font_absolute_size),
                      str(font_pt_size))
-        
+ 
         G15Text.set_attributes(self, text, bounds)
         self.valign = valign
             
@@ -144,25 +145,28 @@ class G15PangoText(G15Text):
         return text_extents.x / Pango.SCALE, text_extents.y / Pango.SCALE, text_extents.width / Pango.SCALE, text_extents.height / Pango.SCALE
     
     def draw(self, x = None, y = None):
-        self.__pango_cairo_context.save()
-        
-        if self.bounds is not None:
-            if x == None:
-                x = self.bounds[0]
-            if y == None:
-                y = self.bounds[1]
-            
-            self.__pango_cairo_context.rectangle(self.bounds[0] - 1, self.bounds[1] - 1, self.bounds[2] + 2, self.bounds[3] + 2)
-            self.__pango_cairo_context.clip()
-            
-            if self.valign == Pango.Alignment.RIGHT:
-                y += self.bounds[3] - ( self.metrics.get_ascent()  / 1000.0 )
-            elif self.valign == Pango.Alignment.CENTER:
-                y += ( self.bounds[3] - ( self.metrics.get_ascent()  / 1000.0 ) ) / 2
-                
-        if x is not None and y is not None:                
-            self.__pango_cairo_context.move_to(x, y)
-            
-        self.__pango_cairo_context.show_layout(self.__layout)
-        self.__pango_cairo_context.restore()
-        
+        if self.canvas == None:
+            logger.warning("G15PangoText Draw method called without a canvas!")
+        else:
+            self.canvas.save()
+
+            if self.bounds is not None:
+                if x == None:
+                    x = self.bounds[0]
+                if y == None:
+                    y = self.bounds[1]
+
+                self.__pango_cairo_context.rectangle(self.bounds[0] - 1, self.bounds[1] - 1, self.bounds[2] + 2, self.bounds[3] + 2)
+                self.__pango_cairo_context.clip()
+
+                if self.valign == Pango.Alignment.RIGHT:
+                    y += self.bounds[3] - ( self.metrics.get_ascent()  / 1000.0 )
+                elif self.valign == Pango.Alignment.CENTER:
+                    y += ( self.bounds[3] - ( self.metrics.get_ascent()  / 1000.0 ) ) / 2
+
+            if x is not None and y is not None:
+                self.canvas.move_to(x, y)
+
+            PangoCairo.show_layout(self.canvas, self.__layout)
+            self.canvas.restore() 
+

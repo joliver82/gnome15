@@ -691,3 +691,4 @@ class Driver(g15driver.AbstractDriver):
             pylibg15.set_keyboard_color(level)
         elif control.id == mkeys_control.id:
             pylibg15.set_leds(level)
+

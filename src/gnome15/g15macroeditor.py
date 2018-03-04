@@ -232,7 +232,7 @@ class G15MacroEditor():
                 self.__save_macro(self.editing_macro)
         
     def _macro_script_changed(self, text_buffer):
-        self.editing_macro.macro = text_buffer.get_text(text_buffer.get_start_iter(), text_buffer.get_end_iter())
+        self.editing_macro.macro = text_buffer.get_text(text_buffer.get_start_iter(), text_buffer.get_end_iter(), false)
         self.__save_macro(self.editing_macro)
         
     def _show_script_editor(self, widget):

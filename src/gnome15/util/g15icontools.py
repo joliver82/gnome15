@@ -37,6 +37,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from io import StringIO
+from io import BytesIO
 
 '''
 Look for icons locally as well if running from source
@@ -77,7 +78,7 @@ def get_embedded_image_url(path):
                         img_data.write(data)
 
             file_str.write(";base64,")
-            file_str.write(base64.b64encode(img_data.getvalue()))
+            file_str.write(base64.b64encode(img_data.getvalue()).decode())
             return file_str.getvalue()
         finally:
             img_data.close()

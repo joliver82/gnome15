@@ -85,10 +85,10 @@ class LCDShotPreferences():
         dialog.set_transient_for(parent)        
         chooser = Gtk.FileChooserDialog("Open..",
                                None,
-                               Gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                               (Gtk.STOCK_CANCEL, Gtk.RESPONSE_CANCEL,
-                                Gtk.STOCK_OPEN, Gtk.RESPONSE_OK))
-        chooser.set_default_response(Gtk.RESPONSE_OK)
+                               Gtk.FileChooserAction.SELECT_FOLDER,
+                               (Gtk.STOCK_CANCEL, Gtk.FileChooserAction.CANCEL,
+                                Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+        chooser.set_default_response(Gtk.ResponseType.OK)
         chooser_button = widget_tree.get_object("FileChooserButton")        
         chooser_button.dialog = chooser 
         chooser_button.connect("file-set", self._file_set)

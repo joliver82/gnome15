@@ -90,7 +90,7 @@ class G15PangoText(G15Text):
             weight = None, style = None, font_pt_size = None,
             valign = None, pxwidth = None):
         
-            logger.debug("Text: %s, bounds = %s, wrap = %s, align = %s, width = %s, " \
+        logger.debug("Text: %s, bounds = %s, wrap = %s, align = %s, width = %s, " \
                      "attributes = %s, spacing = %s, font_desc = %s, weight = %s, " \
                      "style = %s, valign = %s, pxwidth = %s, font_absolute_size = %s, font_pt_size = %s",
                      str(text),

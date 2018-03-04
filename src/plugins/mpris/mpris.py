@@ -26,10 +26,10 @@ from gnome15.util import g15scheduler
 from gnome15.util import g15pythonlang
 from gnome15.util import g15cairo
 from gnome15.util import g15icontools
-from gnome15 import gnome15.g15theme
-from gnome15 import gnome15.g15plugin
-from gnome15 import gnome15.g15devices
-from gnome15 import gnome15.g15actions
+from gnome15 import g15theme
+from gnome15 import g15plugin
+from gnome15 import g15devices
+from gnome15 import g15actions
 import dbus
 import os
 import time

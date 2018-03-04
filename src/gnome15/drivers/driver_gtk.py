@@ -194,9 +194,10 @@ class Driver(g15driver.AbstractDriver):
                 # Now convert the ARGB to a PIL image so it can be converted to a 1 bit monochrome image, with all
                 # colours dithered. It would be nice if Cairo could do this :( Any suggestions? 
                 pil_img = Image.frombuffer("RGBA", self.lcd_size, argb_surface.get_data(), "raw", "RGBA", 0, 1)
-                pil_img = ImageMath.eval("convert(pil_img,'1')",pil_img=pil_img)
-                pil_img = ImageMath.eval("convert(pil_img,'P')",pil_img=pil_img)
-                pil_img = pil_img.point(lambda i: i >= 250,'1')
+                #pil_img = ImageMath.eval("convert(pil_img,'1')",pil_img=pil_img)
+                pil_img = ImageMath.eval("convert(pil_img,'L')",pil_img=pil_img)
+                #pil_img = ImageMath.eval("convert(pil_img,'P')",pil_img=pil_img)
+                pil_img = pil_img.point(lambda i: i >= 170,'1')
                 
                 invert_control = self.get_control("invert_lcd")
                 if invert_control and invert_control.value == 1:            

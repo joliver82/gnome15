@@ -196,7 +196,7 @@ class G15Places(g15plugin.G15MenuPlugin):
         GObject.idle_add(self._do_activate)
         
     def _do_activate(self):
-        self.volume_monitor = Gio.VolumeMonitori.get()
+        self.volume_monitor = Gio.VolumeMonitor.get()
         for mount in self.volume_monitor.get_mounts():
             if not mount.is_shadowed():
                 self._add_mount(mount)

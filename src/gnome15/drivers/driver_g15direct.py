@@ -153,7 +153,7 @@ class G15DirectDriverPreferences():
         self.window = widget_tree.get_object("G15DirectDriverSettings")
         self.set_transient_for(parent)
 
-        g15uiGConf.configure_spinner_from_gconf(gconf_client,
+        g15uigconf.configure_spinner_from_gconf(gconf_client,
                                                 "/apps/gnome15/%s/timeout" % device.uid,
                                                 "Timeout",
                                                 10000,
@@ -166,7 +166,7 @@ class G15DirectDriverPreferences():
             widget_tree.get_object("OffsetLabel").destroy()
             widget_tree.get_object("OffsetDescription").destroy()
         else:
-            g15uiGConf.configure_combo_from_gconf(gconf_client,
+            g15uigconf.configure_combo_from_gconf(gconf_client,
                                                   "/apps/gnome15/%s/joymode" % device.uid,
                                                   "JoyModeCombo",
                                                   "macro",
@@ -317,9 +317,11 @@ class Driver(g15driver.AbstractDriver):
             # Now convert the ARGB to a PIL image so it can be converted to a 1 bit monochrome image, with all
             # colours dithered. It would be nice if Cairo could do this :( Any suggestions? 
             pil_img = Image.frombuffer("RGBA", size, argb_surface.get_data(), "raw", "RGBA", 0, 1)
-            pil_img = ImageMath.eval("convert(pil_img,'1')",pil_img=pil_img)
-            pil_img = ImageMath.eval("convert(pil_img,'P')",pil_img=pil_img)
-            pil_img = pil_img.point(lambda i: i >= 250,'1')
+            #pil_img = ImageMath.eval("convert(pil_img,'1')",pil_img=pil_img)
+            pil_img = ImageMath.eval("convert(pil_img,'L')",pil_img=pil_img)
+            #pil_img = ImageMath.eval("convert(pil_img,'P')",pil_img=pil_img)
+            #pil_img = pil_img.point(lambda i: i >= 250,'1')
+            pil_img = pil_img.point(lambda i: i >= 170,'1')
             
             invert_control = self.get_control("invert_lcd")
             if invert_control.value == 0:            
@@ -334,13 +336,13 @@ class Driver(g15driver.AbstractDriver):
                 logger.warning("Invalid buffer size")
             else:
                 # TODO Replace with C routine
-                arrbuf = array.array('B', self.empty_buf)
+                arrbuf = array.array('B', self.empty_buf.encode())
                 width, height = self.get_size() 
                 max_byte_offset = 0
                 for x in range(0, width):
                     for y in range(0, height):
                         pixel_offset = y * width + x;
-                        byte_offset = pixel_offset / 8;
+                        byte_offset = pixel_offset // 8;
                         max_byte_offset =  max(max_byte_offset, byte_offset)
                         bit_offset = 7-(pixel_offset % 8);
                         val = ord(buf[x+(y*160)])

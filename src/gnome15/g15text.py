@@ -92,7 +92,7 @@ class G15PangoText(G15Text):
         
         logger.debug("Text: %s, bounds = %s, wrap = %s, align = %s, width = %s, " \
                      "attributes = %s, spacing = %s, font_desc = %s, weight = %s, " \
-                     "style = %s, font_pt_size = %s",
+                     "style = %s, valign = %s, font_absolute_size = %s, font_pt_size = %s",
                      str(text),
                      str(bounds),
                      str(wrap),
@@ -103,6 +103,8 @@ class G15PangoText(G15Text):
                      str(font_desc),
                      str(weight),
                      str(style),
+                     str(valign),
+                     str(font_absolute_size),
                      str(font_pt_size))
         
         G15Text.set_attributes(self, text, bounds)

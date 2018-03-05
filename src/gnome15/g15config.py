@@ -942,7 +942,7 @@ class G15Config:
         if val != self.cycle_screens.get_active():
             self.cycle_screens.set_active(val)
             
-    def _control_configuration_changed(self, client, connection_id, entry, *args):
+    def _control_configuration_changed(self, client, connection_id, entry, args):
         widget = args[1]
         control = args[0]
         if isinstance(control.value, int):

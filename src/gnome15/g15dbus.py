@@ -970,7 +970,7 @@ class G15DBUSService(AbstractG15DBUSService):
         return l
 
     @dbus.service.method(IF_NAME, in_signature='ssas')
-    def Launch(self, profile_name, screen_id, *args):
+    def Launch(self, profile_name, screen_id, args):
         logger.info("Launch under profile %s, screen %s, args = %s",
                     profile_name,
                     screen_id,

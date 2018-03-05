@@ -414,7 +414,7 @@ class G15DaemonServer():
         port_entry = self.gconf_client.get(self.gconf_key + "/port")
         return 15550 if port_entry == None else port_entry.get_int()
     
-    def _config_changed(self, client, connection_id, entry, args):
+    def _config_changed(self, client, connection_id, entry, *args):
         self.load_configuration()
         self.screen.redraw() 
         port = self._get_port()

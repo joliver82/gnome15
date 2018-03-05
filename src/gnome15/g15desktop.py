@@ -1224,7 +1224,7 @@ class G15DesktopComponent():
     def _disable(self, widget, device):
         device.Disable()
         
-    def _cycle_screens_option_changed(self, client, connection_id, entry, args):
+    def _cycle_screens_option_changed(self, client, connection_id, entry, *args):
         self.rebuild_desktop_component()
         
     def _remove_screen(self, screen_path):
@@ -1321,7 +1321,7 @@ class G15DesktopComponent():
             items[page_path] = page.GetTitle()
             self.rebuild_desktop_component()
         
-    def _indicator_options_changed(self, client, connection_id, entry, args):
+    def _indicator_options_changed(self, client, connection_id, entry, *args):
         self.options_changed()
     
     def _theme_changed(self, theme):

@@ -322,7 +322,7 @@ class G15SysMon(g15plugin.G15RefreshingPlugin):
     
     ''' Private
     '''
-    def _config_changed(self, client, connection_id, entry, args):
+    def _config_changed(self, client, connection_id, entry, *args):
         self.reload_theme()
         self._reschedule_refresh()
             

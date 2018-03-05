@@ -208,7 +208,7 @@ class G15GlobalConfig:
                 if mod.id == self.selected_id:
                     self.global_plugin_tree.get_selection().select_path(self.global_plugin_model.get_path(self.global_plugin_model.get_iter(len(self.global_plugin_model) - 1)))
         
-    def _plugins_changed(self, client, connection_id, entry, args):
+    def _plugins_changed(self, client, connection_id, entry, *args):
         self._load_plugins()
         
     def _change_gnome_shell_extension(self, widget):
@@ -942,7 +942,7 @@ class G15Config:
         if val != self.cycle_screens.get_active():
             self.cycle_screens.set_active(val)
             
-    def _control_configuration_changed(self, client, connection_id, entry, args):
+    def _control_configuration_changed(self, client, connection_id, entry, *args):
         widget = args[1]
         control = args[0]
         if isinstance(control.value, int):
@@ -1096,7 +1096,7 @@ class G15Config:
         self._load_macro_state()
         self._hide_warning()
             
-    def _device_enabled_configuration_changed(self, client, connection_id, entry, args):
+    def _device_enabled_configuration_changed(self, client, connection_id, entry, *args):
         self._set_enabled_value_from_configuration()
         
     def _set_enabled_value_from_configuration(self):        

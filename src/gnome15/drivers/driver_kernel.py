@@ -1061,7 +1061,7 @@ class Driver(g15driver.AbstractDriver):
     def _config_changed(self, client, connection_id, entry, *args):
         self._reload_and_reconnect()
         
-    def _framebuffer_device_changed(self, client, connection_id, entry, args):
+    def _framebuffer_device_changed(self, client, connection_id, entry, *args):
         self._reload_and_reconnect()
         
     def get_size(self):
@@ -1359,7 +1359,7 @@ It should be launched automatically if Gnome15 is installed correctly.")
         logger.info("G key - %d", key)
         return True
         
-    def _mode_changed(self, client, connection_id, entry, args):
+    def _mode_changed(self, client, connection_id, entry, *args):
         if self.is_connected():
             self.disconnect()
     

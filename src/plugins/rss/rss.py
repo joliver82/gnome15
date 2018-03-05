@@ -121,7 +121,7 @@ class G15RSSPreferences():
         else:
             self.feed_model.remove(self.feed_model.get_iter(row_index))
         
-    def urls_changed(self, client, connection_id, entry, args):
+    def urls_changed(self, client, connection_id, entry, *args):
         self.reload_model()
         
     def reload_model(self):
@@ -351,7 +351,7 @@ class G15RSS():
     def destroy(self):
         pass 
     
-    def _update_time_changed(self, client, connection_id, entry, args):
+    def _update_time_changed(self, client, connection_id, entry, *args):
         self._cancel_refresh()
         self._schedule_refresh()
         
@@ -359,7 +359,7 @@ class G15RSS():
         if self._refresh_timer:        
             self._refresh_timer.cancel()
     
-    def _urls_changed(self, client, connection_id, entry, args):
+    def _urls_changed(self, client, connection_id, entry, *args):
         self._load_feeds()
     
     def _load_feeds(self):

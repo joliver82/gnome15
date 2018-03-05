@@ -191,7 +191,7 @@ class G15Panel():
     Private
     """
     
-    def _config_changed(self, client, connection_id, entry, args):
+    def _config_changed(self, client, connection_id, entry, *args):
         self._set_available_screen_size()
         self.screen.redraw()
         

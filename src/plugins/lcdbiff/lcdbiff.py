@@ -502,7 +502,7 @@ class G15Biff(g15plugin.G15MenuPlugin):
         if self.screen.driver.get_bpp() == 1:
             self.screen.redraw(self.page)
     
-    def _update_time_changed(self, client, connection_id, entry, args):
+    def _update_time_changed(self, client, connection_id, entry, *args):
         self.refresh_timer.cancel()
         self.schedule_refresh()
         

@@ -195,7 +195,7 @@ class G15Background():
             self.gnome_dconf_settings.disconnect(self.gnome_dconf_handle)
             self.gnome_dconf_settings.__del__()
         
-    def config_changed(self, client, connection_id, entry, args):
+    def config_changed(self, client, connection_id, entry, *args):
         self._do_config_changed()
         
     def destroy(self):
@@ -204,7 +204,7 @@ class G15Background():
     '''
     Private
     ''' 
-    def _active_profile_changed(self, client, connection_id, entry, args):
+    def _active_profile_changed(self, client, connection_id, entry, *args):
         self._do_config_changed()
         
     def _profiles_changed(self, profile_id, device_uid):

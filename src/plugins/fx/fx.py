@@ -79,7 +79,7 @@ class G15Fx():
     ''' Callbacks
     '''
         
-    def config_changed(self, client, connection_id, entry, args):
+    def config_changed(self, client, connection_id, entry, *args):
         self.screen.redraw()
     
     

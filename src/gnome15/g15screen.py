@@ -788,7 +788,7 @@ class G15Screen():
             level = control.upper
         self.conf_client.set_int("/apps/gnome15/%s/%s" % (self.device.uid, control.id), level)
         
-    def control_configuration_changed(self, client, connection_id, entry, args):
+    def control_configuration_changed(self, client, connection_id, entry, *args):
         key = os.path.basename(entry.key)
         logger.debug("Controls changed %s", str(key))
         if self.driver != None:
@@ -829,13 +829,13 @@ class G15Screen():
             raise Exception("Cannot release defeat profile change if not requested")
         self.defeat_profile_change -= 1
         
-    def driver_changed(self, client, connection_id, entry, args):
+    def driver_changed(self, client, connection_id, entry, *args):
         if self.reconnect_timer:
             self.reconnect_timer.cancel()
         if self.driver == None or self.driver.id != entry.value.get_string():
             g15scheduler.schedule("DriverChange", 1.0, self._reload_driver)
         
-    def active_profile_changed(self, client, connection_id, entry, args):
+    def active_profile_changed(self, client, connection_id, entry, *args):
         # Check if the active profile has change)
         new_profile = g15profile.get_active_profile(self.device)
         if new_profile == None:
@@ -954,7 +954,7 @@ class G15Screen():
         self.deleting = { }
         self._do_redraw()
              
-    def _control_changed(self, client, connection_id, entry, args):
+    def _control_changed(self, client, connection_id, entry, *args):
         control_id = entry.get_key().split("/")[-1]
         control = self.driver.get_control(control_id)
         control.set_from_configuration(self.driver.device, self.conf_client)

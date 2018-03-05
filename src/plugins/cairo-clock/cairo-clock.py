@@ -22,7 +22,7 @@ gi.require_version('Rsvg', '2.0')
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from gi.repository import Pango
-from gi.repository import Rsvg as rsvg
+from gi.repository import Rsvg 
 
 from gnome15 import g15screen
 from gnome15 import g15theme
@@ -154,7 +154,7 @@ class G15CairoClock(g15plugin.G15RefreshingPlugin):
         # Painting is done using cairo and cairo-clock themes, no need for a theme
         return None
             
-    def config_changed(self, client, connection_id, entry, args):
+    def config_changed(self, client, connection_id, entry, *args):
         self._load_surfaces()
         self.screen.set_priority(self.page, g15screen.PRI_HIGH, revert_after = 3.0)
         self.do_refresh()
@@ -217,7 +217,7 @@ class G15CairoClock(g15plugin.G15RefreshingPlugin):
         for i in names:
             path = self.clock_theme_dir + "/" + i + ".svg"
             if os.path.exists(path):  
-                svg = rsvg.Handle(path)
+                svg = Rsvg.Handle.new_from_file(path)
                 try: 
                     if self.svg_size == None:
                         self.svg_size = svg.get_dimension_data()[2:4]

@@ -92,7 +92,7 @@ class G15Plugin():
     def destroy(self):
         pass
             
-    def _reactivate(self, client, connection_id, entry, args):
+    def _reactivate(self, client, connection_id, entry, *args):
         self.deactivate()
         self.activate()
         

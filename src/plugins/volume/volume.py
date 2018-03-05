@@ -215,7 +215,7 @@ class G15Volume():
         self._volthread = VolumeThread(self)
         self._volthread.start()
     
-    def _config_changed(self, client, connection_id, entry, args):    
+    def _config_changed(self, client, connection_id, entry, *args):    
         '''
         If the user changes the soundcard on the preferences dialog this method
         would be called two times. A first time for the soundcard change, and a

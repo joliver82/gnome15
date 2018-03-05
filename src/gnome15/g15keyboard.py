@@ -144,7 +144,7 @@ class G15KeyHandler():
     Callbacks
     """
             
-    def _active_profile_changed(self, client, connection_id, entry, args):
+    def _active_profile_changed(self, client, connection_id, entry, *args):
         self._reload_active_macros()
         return 1
 

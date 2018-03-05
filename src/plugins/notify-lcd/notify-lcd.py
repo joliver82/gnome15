@@ -514,7 +514,7 @@ class G15NotifyLCD():
     ''' 
     Private
     '''     
-    def _configuration_changed(self, client, connection_id, entry, args):
+    def _configuration_changed(self, client, connection_id, entry, *args):
         self._load_configuration()
           
     def _get_theme_properties(self):

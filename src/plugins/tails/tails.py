@@ -127,7 +127,7 @@ class G15TailsPreferences():
             del files[row_index]
             self._gconf_client.set_list(self._gconf_key + "/files", GConf.VALUE_STRING, files)
         
-    def files_changed(self, client, connection_id, entry, args):
+    def files_changed(self, client, connection_id, entry, *args):
         self.reload_model()
         
     def reload_model(self):
@@ -327,10 +327,10 @@ class G15Tails():
     def destroy(self):
         pass 
     
-    def _lines_changed(self, client, connection_id, entry, args):
+    def _lines_changed(self, client, connection_id, entry, *args):
         self._load_files()
         
-    def _files_changed(self, client, connection_id, entry, args):
+    def _files_changed(self, client, connection_id, entry, *args):
         self._load_files()
     
     def _load_files(self):

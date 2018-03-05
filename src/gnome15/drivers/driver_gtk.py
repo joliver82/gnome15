@@ -300,7 +300,7 @@ class Driver(g15driver.AbstractDriver):
             w.destroy()
         self.area = None
         
-    def _mode_changed(self, client, connection_id, entry, args):
+    def _mode_changed(self, client, connection_id, entry, *args):
         if self.is_connected():
             GLib.idle_add(self.disconnect)
         else:

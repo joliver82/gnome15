@@ -456,7 +456,7 @@ class G15AccountPreferences():
                 self.account_mgr.accounts.remove(acc)
             self._reload_model()
         
-    def _urls_changed(self, client, connection_id, entry, args):
+    def _urls_changed(self, client, connection_id, entry, *args):
         self._reload_model()
         
     def _reload_model(self):

@@ -499,7 +499,7 @@ class G15DBUSScreenService(AbstractG15DBUSService):
         for h in self._notify_handles:
             self._service.conf_client.notify_remove(h)
         
-    def _cycle_screens_option_changed(self, client, connection_id, entry, args):
+    def _cycle_screens_option_changed(self, client, connection_id, entry, *args):
         self.CyclingChanged(entry.value.get_bool())
     
     def _get_dimmable_controls(self):
@@ -970,7 +970,7 @@ class G15DBUSService(AbstractG15DBUSService):
         return l
 
     @dbus.service.method(IF_NAME, in_signature='ssas')
-    def Launch(self, profile_name, screen_id, args):
+    def Launch(self, profile_name, screen_id, *args):
         logger.info("Launch under profile %s, screen %s, args = %s",
                     profile_name,
                     screen_id,

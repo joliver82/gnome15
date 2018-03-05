@@ -269,7 +269,7 @@ class G15Weather(g15plugin.G15RefreshingPlugin):
         val = g15gconf.get_int_or_default(self.gconf_client, self.gconf_key + "/update", DEFAULT_UPDATE_INTERVAL)
         self.refresh_interval = val * 60.0
         
-    def _loc_changed(self, client, connection_id, entry, args):
+    def _loc_changed(self, client, connection_id, entry, *args):
         if not entry.get_key().endswith("/theme") and not entry.get_key().endswith("/enabled"):
             if self._config_change_handle is not None:
                 self._config_change_handle.cancel()

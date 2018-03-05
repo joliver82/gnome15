@@ -308,7 +308,7 @@ class G15Impulse():
                 next_tick = 1.0
             self.timer = g15scheduler.queue("impulseQueue", "ImpulseRedraw", next_tick, self.redraw)
         
-    def _config_changed(self, client, connection_id, entry, args):
+    def _config_changed(self, client, connection_id, entry, *args):
         if self.config_change_timer is not None:
             self.config_change_timer.cancel()
         self.config_change_timer = g15scheduler.schedule("ConfigReload", 1, self._do_config_changed)

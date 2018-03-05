@@ -20,8 +20,8 @@ from gnome15 import g15locale
 _ = g15locale.get_translation("voip-teamspeak3", modfile = __file__).gettext
 
 from gnome15 import g15driver as g15driver
-from gnome15.icons import g15icontools
-from . import ts3
+from gnome15.util import g15icontools
+import ts3
 from threading import Thread
 from threading import Lock
 from threading import RLock

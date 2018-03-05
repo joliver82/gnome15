@@ -482,7 +482,7 @@ class G15PommodoroPlugin(g15plugin.G15RefreshingPlugin):
                          / self.pommodoro_timer.timer_value.total_seconds() \
                          * 100)
 
-    def _config_changed(self, client, connection_id, entry, args):
+    def _config_changed(self, client, connection_id, entry, *args):
         self._load_configuration()
         self.screen.set_priority(self.page, g15screen.PRI_HIGH, revert_after = 3.0)
 

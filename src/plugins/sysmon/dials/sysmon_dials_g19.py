@@ -31,7 +31,7 @@ needles = {
         "mem_cached_pc" : (254, 198,    rsvg.Handle(os.path.join(os.path.dirname(__file__), "g19-tiny-needle.svg")))
            }
 
-def paint_foreground(theme, canvas, properties, attributes, args): 
+def paint_foreground(theme, canvas, properties, attributes, *args): 
     for key in list(needles.keys()):
         needle = needles[key]
         svg = needle[2]      

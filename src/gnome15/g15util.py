@@ -85,13 +85,13 @@ def configure_combo_from_gconf(gconf_client, gconf_key, widget_id, default_value
 def combo_box_changed(widget, gconf_client, key, model, default_value):
     g15uiGConf.combo_box_changed(widget, gconf_client, key, model, default_value)
 
-def boolean_conf_value_change(client, connection_id, entry, args):
+def boolean_conf_value_change(client, connection_id, entry, *args):
     g15uiGConf.boolean_conf_value_change(client, connection_id, entry, args)
 
-def text_conf_value_change(client, connection_id, entry, args):
+def text_conf_value_change(client, connection_id, entry, *args):
     g15uiGConf.text_conf_value_change(client, connection_id, entry, args)
 
-def radio_conf_value_change(client, connection_id, entry, args):
+def radio_conf_value_change(client, connection_id, entry, *args):
     g15uiGConf.radio_conf_value_change(client, connection_id, entry, args)
 
 def configure_checkbox_from_gconf(gconf_client, gconf_key, widget_id, default_value, widget_tree, watch_changes = False):

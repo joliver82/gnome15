@@ -353,7 +353,7 @@ class G15Cal(g15plugin.G15Plugin):
     Private
     """
     
-    def _config_changed(self, client, connection_id, entry, args):
+    def _config_changed(self, client, connection_id, entry, *args):
         self._loaded = 0
         self._redraw()
         

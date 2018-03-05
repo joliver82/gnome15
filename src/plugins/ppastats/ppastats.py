@@ -111,7 +111,7 @@ class G15PPAStatsPreferences():
         else:
             self.feed_model.remove(self.feed_model.get_iter(row_index))
         
-    def urls_changed(self, client, connection_id, entry, args):
+    def urls_changed(self, client, connection_id, entry, *args):
         self.reload_model()
         
     def reload_model(self):
@@ -210,11 +210,11 @@ class G15PPAStats():
             self.screen.redraw(page.page)
         self._schedule_refresh()
     
-    def _update_time_changed(self, client, connection_id, entry, args):
+    def _update_time_changed(self, client, connection_id, entry, *args):
         self.refresh_timer.cancel()
         self._schedule_refresh()
     
-    def _ppas_changed(self, client, connection_id, entry, args):
+    def _ppas_changed(self, client, connection_id, entry, *args):
         self._load_ppas()
     
     def _load_ppas(self):

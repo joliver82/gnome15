@@ -272,7 +272,7 @@ class G15Clock(g15plugin.G15Plugin):
     ***********************************************************    
     ''' 
         
-    def _config_changed(self, client, connection_id, entry, args):
+    def _config_changed(self, client, connection_id, entry, *args):
         
         '''
         Load the gconf configuration

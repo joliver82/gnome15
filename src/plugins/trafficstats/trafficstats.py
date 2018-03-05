@@ -171,7 +171,7 @@ class G15TrafficStats(g15plugin.G15RefreshingPlugin):
         '''
         pass
 
-    def _config_changed(self, client, connection_id, entry, args):
+    def _config_changed(self, client, connection_id, entry, *args):
 
         '''
         Load the gconf configuration

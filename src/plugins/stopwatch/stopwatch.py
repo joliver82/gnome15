@@ -235,7 +235,7 @@ class G15Stopwatch(g15plugin.G15RefreshingPlugin):
     ***********************************************************    
     ''' 
 
-    def _config_changed(self, client, connection_id, entry, args):
+    def _config_changed(self, client, connection_id, entry, *args):
         self._load_configuration()
         self.reload_theme()
         self.screen.set_priority(self.page, g15screen.PRI_HIGH, revert_after = 3.0)

@@ -490,7 +490,7 @@ class G15Sensors(g15plugin.G15RefreshingPlugin):
     ''' Private
     '''
     
-    def _sensors_changed(self, client, connection_id, entry, args):        
+    def _sensors_changed(self, client, connection_id, entry, *args):        
         self.page.remove_all_children()
         self.populate_page()
         self.refresh()

@@ -199,9 +199,9 @@ AS_IF([test -z "${UDEV_RULES_PATH}"],
 AC_ARG_VAR(DEVICEGROUP, [Group that the devices will be owned by. Defaults to plugdev])
 AS_IF([test -z "${DEVICEGROUP}"],
 	AC_SUBST([DEVICEGROUP], [plugdev]))
-AC_ARG_VAR(DEVICEMODE, [Permissions of the devices. Defaults to 0660])
+AC_ARG_VAR(DEVICEMODE, [Permissions of the devices. Defaults to 0666])
 AS_IF([test -z "${DEVICEMODE}"],
-	AC_SUBST([DEVICEMODE], [0660]))
+	AC_SUBST([DEVICEMODE], [0666]))
 
 dnl Drivers
 AC_ARG_ENABLE([driver-kernel],

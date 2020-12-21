@@ -1,6 +1,6 @@
 AC_INIT([gnome15], [0.11.0], [bugs@gnome15.org])
 AC_CONFIG_SRCDIR([src/gnome15/g15service.py])
-AM_INIT_AUTOMAKE([tar-ustar])
+AM_INIT_AUTOMAKE([tar-ustar foreign])
 AM_MAINTAINER_MODE
 
 AC_CONFIG_MACRO_DIR([m4])

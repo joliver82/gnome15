@@ -1,11 +1,7 @@
-# STATUS OF GNOME15
+# Fork of Gnome15
 
-Gnome15 is currently **not complete maintained**.
-The original primary repository has been unavailable since November 2014 due to a hosting server crash.
-This fork was made to add a feature and has not been updated since November 2013, but it appears to be the latest snapshot of the repository that is currently publicly available.
-
-I intend to bring this repository up to date with the latest version (the version before the server crash) using the code contained in the latest distribution packages available.
-We want to maintain it, so many we can. Feel free to work with.
+This is a fork of the Gnome15, which does not seem to be maintained by the original authors anymore.
+However, this fork was maintained to run on fedora 33. Refer to the original repo (here)[https://github.com/Gnome15/gnome15].
 
 # Gnome15
 
@@ -24,7 +20,7 @@ Dependencies may be incomplete..
 
 # How to report bugs
 
-Issues can be submited on the [github website](https://github.com/Huskynarr/gnome15/issues).
+Issues can be submitted on the [github website](https://github.com/thosoo/gnome15/issues).
 
 # Requirements
 

@@ -12,52 +12,19 @@ We want to maintain it, so many we can. Feel free to work with.
 A set of tools for configuring the Logitech G15 keyboard.
 
 Contains pylibg19, a library providing support for the Logitech G19 until there
-is kernel support available. It was based "Logitech-G19-Linux-Daemon" [1],
-the work of "MultiCoreNop" [2].
-
-1. http://github.com/MultiCoreNop/Logitech-G19-Linux-Daemon
-2. http://github.com/MultiCoreNop
+is kernel support available. It was based ("Logitech-G19-Linux-Daemon")[http://github.com/MultiCoreNop/Logitech-G19-Linux-Daemon],
+the work of (MultiCoreNop)[http://github.com/MultiCoreNop].
 
 # Installation
+
+For installations, refer to the (install instructions)[https://github.com/thosoo/gnome15/wiki/Install-Instructions] in the wiki.
 Dependencies may be incomplete.. 
 
-``` sh
 
-sudo dnf install libXtst-devel libxkbfile-devel
-
-cd ./tmp
-wget https://launchpad.net/virtkey/0.63/0.63.0/+download/virtkey-0.63.0.tar.gz
-tar -xf virtkey-0.63.0.tar.gz
-cd virtkey-0.63.0
-sudo python setup.py install
-cd ../..
-
-sudo pip install keyring
-
-cd ./tmp
-git clone https://github.com/guidugli/pyinputevent.git
-cd pyinputevent
-sudo python setup.py install
-cd ../..
-
-cd ./tmp
-git clone https://github.com/tuomasjjrasanen/python-uinput.git
-cd python-uinput
-sudo python setup.py install
-cd ../..
-
-sudo autoreconf -i
-sudo ./configure
-make
-sudo make install
-```
 
 # How to report bugs
 
-
-Issues can be submited on the [github website](https://github.com/Huskynarr/gnome15/issues) [3].
-
-3. https://github.com/Huskynarr/gnome15/issues
+Issues can be submited on the [github website](https://github.com/Huskynarr/gnome15/issues).
 
 # Requirements
 
